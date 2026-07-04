@@ -32,10 +32,10 @@ public class Department implements Data {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 100)
+    @Column(length = 100, nullable = false)
     private String name;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "division_id", referencedColumnName = "id")
+    @JoinColumn(name = "division_id", referencedColumnName = "id", nullable = false)
     private Division division;
     @OneToMany(mappedBy = "department")
     private List<Project> projects;
@@ -43,5 +43,6 @@ public class Department implements Data {
     @Override
     public void validateData() throws InvalidDataException {
         if (name == null || name.isBlank()) throw new InvalidDataException("Department name is required");
+        if (division == null) throw new InvalidDataException("Division is required");
     }
 }

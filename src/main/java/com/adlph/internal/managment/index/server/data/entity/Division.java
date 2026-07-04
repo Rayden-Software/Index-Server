@@ -29,7 +29,7 @@ public class Division implements Data {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 100)
+    @Column(length = 100, nullable = false)
     private String name;
     @OneToMany(mappedBy = "division")
     private List<Department> departments;

@@ -32,10 +32,10 @@ public class Project implements Data {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 100)
+    @Column(length = 100, nullable = false)
     private String name;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    @JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
     private Department department;
     @OneToMany(mappedBy = "project")
     private List<Product> products;
@@ -43,5 +43,6 @@ public class Project implements Data {
     @Override
     public void validateData() throws InvalidDataException {
         if (name == null || name.isBlank()) throw new InvalidDataException("Project name is required");
+        if (department == null) throw new InvalidDataException("Department is required");
     }
 }

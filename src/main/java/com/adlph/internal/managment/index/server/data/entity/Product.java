@@ -31,19 +31,22 @@ public class Product implements Data {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, length = 100)
+    @Column(length = 100, nullable = false)
     private String name;
-    @Column(length = 20)
+    @Column(length = 20, nullable = false)
     private String version;
     private LocalDate publishDate;
     @Column(length = 500)
     private String descritpion;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    @JoinColumn(name = "project_id", referencedColumnName = "id", nullable = false)
     private Project project;
 
     @Override
     public void validateData() throws InvalidDataException {
         if (name == null || name.isBlank()) throw new InvalidDataException("Product name is required");
+        if (version == null || version.isBlank()) throw new InvalidDataException("Product version is required");
+        if (!version.matches("^v\\d{2}\\.\\d{2}\\.\\d{3}$")) throw new InvalidDataException("Version format must be v00.00.000");
+        if (project == null) throw new InvalidDataException("Project is required");
     }
 }
