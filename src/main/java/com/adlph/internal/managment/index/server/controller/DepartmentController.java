@@ -27,10 +27,10 @@ public class DepartmentController implements DepartmentControllerInterface {
     private DivisionRepository divisionRepository;
 
     @Override
-    public List<DepartmentVO> findAllDepartments() throws ServerErrorException {
+    public List<DepartmentVO> findAllDepartments(Long divisionId, Integer count, Integer page) throws ServerErrorException {
         LOG.debug("Finding all departments");
         try {
-            return departmentRepository.findAll().stream()
+            return departmentRepository.findAll(divisionId, count, page).stream()
                 .map(DepartmentController::Department2DepartmentVO)
                 .toList();
         } catch (Exception e) {

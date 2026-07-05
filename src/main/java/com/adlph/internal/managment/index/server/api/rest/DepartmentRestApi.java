@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -35,10 +36,13 @@ public class DepartmentRestApi {
     private DepartmentControllerInterface departmentController;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<DepartmentResponse>>> findAllDepartments() {
+    public ResponseEntity<ApiResponse<List<DepartmentResponse>>> findAllDepartments(
+            @RequestParam(required = false) Long divisionId,
+            @RequestParam(required = false) Integer count,
+            @RequestParam(required = false) Integer page) {
         LOG.trace("---> findAllDepartments()");
         try {
-            List<DepartmentResponse> departments = departmentController.findAllDepartments().stream()
+            List<DepartmentResponse> departments = departmentController.findAllDepartments(divisionId, count, page).stream()
                 .map(DepartmentRestApi::toResponse).toList();
             LOG.trace("<--- findAllDepartments()");
             return ResponseEntity.ok(ApiResponse.ok(departments));
