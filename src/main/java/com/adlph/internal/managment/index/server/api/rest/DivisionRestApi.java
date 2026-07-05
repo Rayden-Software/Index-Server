@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -35,10 +36,12 @@ public class DivisionRestApi {
     private DivisionControllerInterface divisionController;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<DivisionResponse>>> findAllDivisions() {
+    public ResponseEntity<ApiResponse<List<DivisionResponse>>> findAllDivisions(
+            @RequestParam(required = false) Integer count,
+            @RequestParam(required = false) Integer page) {
         LOG.trace("---> findAllDivisions()");
         try {
-            List<DivisionResponse> divisions = divisionController.findAllDivisions().stream()
+            List<DivisionResponse> divisions = divisionController.findAllDivisions(count, page).stream()
                 .map(DivisionRestApi::toResponse).toList();
             LOG.trace("<--- findAllDivisions()");
             return ResponseEntity.ok(ApiResponse.ok(divisions));

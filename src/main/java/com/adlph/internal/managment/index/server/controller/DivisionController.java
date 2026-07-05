@@ -22,10 +22,10 @@ public class DivisionController implements DivisionControllerInterface {
     private DivisionRepository divisionRepository;
 
     @Override
-    public List<DivisionVO> findAllDivisions() throws ServerErrorException {
+    public List<DivisionVO> findAllDivisions(Integer count, Integer page) throws ServerErrorException {
         LOG.debug("Finding all divisions");
         try {
-            return divisionRepository.findAll().stream()
+            return divisionRepository.findAll(count, page).stream()
                 .map(DivisionController::Division2DivisionVO)
                 .toList();
         } catch (Exception e) {
