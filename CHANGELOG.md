@@ -3,26 +3,26 @@
 ## [1.1.0] - 2026-07-07
 
 ### Added
-- Paginación y filtros para Divisiones
-- Paginación y filtros para Departamentos
-- Paginación y filtros para Proyectos
-- Paginación y filtros para Productos
-- Endpoint de total de resultados y número de páginas
-- Tests unitarios
+- Pagination and filters for Divisions
+- Pagination and filters for Departments
+- Pagination and filters for Projects
+- Pagination and filters for Products
+- Total results and pages endpoint
+- Unit tests
 
 ### Fixed
-- Errores en primera ejecución
-- Errores de HTTPS
+- First execution errors
+- HTTPS errors
 
 ### Changed
-- Actualizado IndexServer.sh con opción para copiar JAR a `dist/`
-- Actualizado .gitignore
+- Updated IndexServer.sh with option to copy JAR to `dist/`
+- Updated .gitignore
 
 ## [1.0.2] - 2026-07-07
 
 ### Added
-- Soporte HTTPS y script para generar SSL keystore
-- Configuración de CORS editable desde properties
+- HTTPS support and script to generate SSL keystore
+- CORS configuration editable from properties
 
 ### Fixed
-- Correcciones de datetime y typos
+- Datetime and typo fixes
